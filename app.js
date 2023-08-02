@@ -6,9 +6,10 @@ app.get("/", function(req, res) {
     res.send("Hello World")
 })
 
-app.get("/user", function(req, res) {
+app.get("/user/:nome/sobrenome/:sobrenome", function(req, res) {
     res.send({
-        nome: "José"
+        nome: req.params.nome,
+        sobrenome: req.params.sobrenome
     })
 })
 
