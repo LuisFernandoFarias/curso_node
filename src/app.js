@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
 app.get('/user/:nome/sobrenome/:sobrenome', function (req, res) {
   res.send({
     nome: req.params.nome,
-    sobrenome: req.params.sobrenome
+    sobrenome: req.params.sobrenome,
   })
 })
 
