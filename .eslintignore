@@ -1,5 +1,1 @@
-node_modules/
-coverage/
-*.snap.ts
-/src/routerLoader.ts
 /build
