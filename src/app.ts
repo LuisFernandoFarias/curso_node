@@ -9,6 +9,6 @@ app.use(express.json())
 app.use(userRouter)
 app.use(productRouter)
 
-app.listen(8080, function () {
+app.listen(8080, (): void => {
   console.log('Servidor rodando')
 })
