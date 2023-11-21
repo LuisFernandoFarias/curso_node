@@ -5,6 +5,7 @@ import { UserInsertDTO } from './dtos/user-insert.dto'
 import { NotFoundException } from '@exceptions/not-found-exception'
 import { ReturnError } from '@exceptions/dtos/return-error.dtos'
 import { authMiddleware } from 'src/middlewares/auth.middleware'
+import { authAdminMiddleware } from 'src/middlewares/auth-admin.middlewarw'
 
 const createUserController = async (req: Request<core.ParamsDictionary, any, UserInsertDTO>, res: Response): Promise<void> => {
   const user = await createUser(req.body).catch((error) => {
@@ -30,7 +31,7 @@ const router = Router()
 userRouter.use('/user', router)
 
 router.post('/', createUserController)
-router.use(authMiddleware)
+router.use(authAdminMiddleware)
 router.get('/', getUsersController)
 
 export default userRouter

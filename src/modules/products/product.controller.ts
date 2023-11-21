@@ -1,6 +1,6 @@
 import { Response, Router } from 'express'
 
-const getProduct = (_, res: Response) => {
+const getProduct = (_: any, res: Response) => {
   res.send('PRODUTO')
 }
 
