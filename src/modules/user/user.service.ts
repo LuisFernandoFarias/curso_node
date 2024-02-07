@@ -3,6 +3,8 @@ import { UserModel } from './user.model'
 import { UserInsertDTO } from './dtos/user-insert.dto'
 import { NotFoundException } from 'src/exceptions/not-found-exception'
 import { BadRequestException } from '@exceptions/bad-request-exception'
+import { createPasswordHashed } from '@utils/password'
+import { UserEditPasswordDTO } from './dtos/user-edit-password.dto'
 
 const prisma = new PrismaClient()
 
@@ -56,7 +58,42 @@ export const createUser = async (body: UserInsertDTO): Promise<UserModel> => {
     throw new BadRequestException('CPF already exist')
   }
 
+  const user: UserInsertDTO = {
+    ...body,
+    password: await createPasswordHashed(body.password)
+  }
+
   return prisma.user.create({
-    data: body,
+    data: user,
+  })
+}
+
+export const getUserById = async (userId: number): Promise<UserModel> => {
+  const user = await prisma.user.findFirst({
+    where: {
+      id: userId
+    }
+  })
+
+  if(!user) {
+    throw new NotFoundException('User')
+  }
+
+  return user
+}
+
+export const editPassword = (userId: number, userEditPasswordDTO: UserEditPasswordDTO): Promise<UserModel> => {
+  const user = await getUserById(userId)
+
+  const newUser = {
+    ...user,
+    password: await createPasswordHashed(userEditPasswordDTO.password)
+  }
+
+  return prisma.user.update({
+    where: {
+      id: userId
+    },
+    data: newUser
   })
 }
