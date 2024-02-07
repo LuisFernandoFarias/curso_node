@@ -1,11 +1,13 @@
 import { Response, Router } from 'express'
 
-export const productRouter = Router()
+const getProduct = (_: any, res: Response) => {
+  res.send('PRODUTO')
+}
 
+const productRouter = Router()
 const router = Router()
 
 productRouter.use('/product', router)
+router.get('/', getProduct)
 
-router.get('/', function (_, res: Response) {
-  res.send('PRODUTO')
-})
+export default productRouter
