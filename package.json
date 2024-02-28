@@ -8,7 +8,9 @@
     "start": "node src/app.ts",
     "lint:fix": "npx eslint ./src --ext .ts --fix --ignore-path ./.gitignore",
     "lint:format": "npx prettier --log-level warn --write \"./src/**/*.{js,ts}\" ",
-    "lint": "npm run lint:format && npm run lint:fix"
+    "lint": "npm run lint:format && npm run lint:fix",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
   },
   "repository": {
     "type": "git",
